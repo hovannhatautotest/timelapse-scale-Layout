@@ -1,0 +1,7 @@
+<ngx-suneditor
+  [options]="editorOptions"
+  (created)="onEditorCreated($event)"
+  (onChange)="onSave(ngxSunEditor.getContents(true))"
+  (onImageUploadBefore)="onImageUploadBefore($event)"
+  (onImageUpload)="onImageUpload($event)"
+></ngx-suneditor>

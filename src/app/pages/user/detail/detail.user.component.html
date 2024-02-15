@@ -1,0 +1,306 @@
+<div class="flex pt-10 py-5 px-2.5 bg-white intro-x">
+  <div class="sm:w-[970px] mx-auto flex gap-4">
+    <button (click)="handleBack()" [title]="'routes.admin.Layout.back' | translate">
+      <i class="las la-arrow-left text-2xl text-blue-500"></i>
+    </button>
+    <h2 class="text-2xl font-semibold">
+      {{ 'routes.admin.user.infomationAccount' | translate }}
+    </h2>
+  </div>
+</div>
+<div
+  class="min-h-[calc(100vh-128px)] bg-gray-100 pt-5 pb-10 px-2.5 xl:px-10"
+  *ngIf="(this.userFacade.data$ | async) || (this.partnerMeFacade.data$ | async); let user"
+>
+  <nz-spin [nzSpinning]="userFacade.isLoading$ | async">
+    <div class="xl:w-[900px] mx-auto p-5 rounded-md bg-white shadow -intro-x">
+      <nz-tabset>
+        <nz-tab [nzTitle]="'routes.admin.user.infomationInternalAccount' | translate">
+          <div class="flex md:flex-row flex-col justify-between mb-5">
+            <p class="font-medium text-black text-lg">
+              {{ 'routes.admin.user.infomationInternalAccount' | translate }}
+            </p>
+            <div class="gap-2 flex justify-end mt-2 flex-wrap">
+              <g-button
+                *ngIf="!user?.brokerNoteHistory"
+                [routerLink]="['level']"
+                [text]="'routes.admin.user.Upgrade' | translate"
+              ></g-button>
+              <g-button
+                *ngIf="admin"
+                nz-popconfirm
+                [nzPopconfirmTitle]="
+                  (user.isLockedOut ? 'routes.admin.user.wUnlock' : 'routes.admin.user.wLock') | translate
+                "
+                (nzOnConfirm)="
+                  user.isLockedOut ? userFacade.putUnlock(user.id || '') : userFacade.putLock(user.id || '')
+                "
+                [extendClass]="!user.isLockedOut ? '!bg-red-600' : '!bg-green-600'"
+                [text]="(!user.isLockedOut ? 'routes.admin.user.lock' : 'routes.admin.user.unlock') | translate"
+              ></g-button>
+              <g-button
+                *ngIf="user.roleListCode.indexOf('BROKER') > -1 && admin"
+                nz-popconfirm
+                [nzPopconfirmTitle]="'routes.admin.user.wanttodowngrade' | translate"
+                (nzOnConfirm)="userFacade.putDowngradeBroker(user.id || '')"
+                [text]="'routes.admin.user.Downgrade' | translate"
+              ></g-button>
+              <g-button
+                *ngIf="
+                  (user.roleListCode.indexOf('USER') > -1 || user.roleListCode.indexOf('BROKER') > -1) &&
+                  admin &&
+                  !user.isActive
+                "
+                [routerLink]="['transfer-profile']"
+                [text]="'routes.admin.user.transfer Profile' | translate"
+              ></g-button>
+            </div>
+          </div>
+          <table class="w-full mb-5 hidden md:list-item xl:table overflow-x-auto">
+            <tbody>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 text-left px-3 py-3 w-36 bg-gray-100">
+                  {{ 'routes.admin.user.userName' | translate }}
+                </th>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left px-3">{{ user?.name }}</th>
+                <th class="border border-slate-300 font-normal text-gray-500 text-left px-3 py-3 w-52 bg-gray-100">
+                  Email
+                </th>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left px-3">{{ user?.email }}</th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 text-left px-3 py-3 bg-gray-100">
+                  {{ 'User Name' | translate }}
+                </th>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left px-3">
+                  {{ user?.userName }}
+                </th>
+                <th class="border border-slate-300 font-normal text-gray-500 text-left px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.phoneNumber' | translate }}
+                </th>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left px-3">
+                  {{ user?.phoneNumber }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 text-left px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.birthdate' | translate }}
+                </th>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left px-3">
+                  {{ user?.birthdate | date: 'dd/MM/yyyy' }}
+                </th>
+                <th class="border border-slate-300 font-normal text-gray-500 text-left px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.lastActivityDate' | translate }}
+                </th>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left px-3">
+                  {{ user?.lastActivityDate | date: 'HH:mm:ss dd/MM/yyyy' }}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+          <table class="w-full mb-5 table sm:hidden">
+            <tbody>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.userName' | translate }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left py-3 px-3">{{ user?.name }}</th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 px-3 py-3 bg-gray-100">Email</th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left py-3 px-3">{{ user?.email }}</th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 px-3 py-3 bg-gray-100">
+                  {{ 'User Name' | translate }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left py-3 px-3">
+                  {{ user?.userName }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.phoneNumber' | translate }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left py-3 px-3">
+                  {{ user?.phoneNumber }}
+                </th>
+              </tr>
+              <tr *ngIf="user?.birthdate">
+                <th class="border border-slate-300 font-normal text-gray-500 px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.birthdate' | translate }}
+                </th>
+              </tr>
+              <tr *ngIf="user?.birthdate">
+                <th class="border border-slate-300 font-medium text-gray-900 text-left py-3 px-3">
+                  {{ user?.birthdate | date: 'dd/MM/yyyy' }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-normal text-gray-500 px-3 py-3 bg-gray-100">
+                  {{ 'routes.admin.user.lastActivityDate' | translate }}
+                </th>
+              </tr>
+              <tr>
+                <th class="border border-slate-300 font-medium text-gray-900 text-left py-3 px-3">
+                  {{ user?.lastActivityDate | date: 'HH:mm:ss dd/MM/yyyy' }}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+          <ng-container *ngIf="admin">
+            <nz-form-item>
+              <nz-form-label class="text-left w-full font-medium" nzFor="urlRewrite">{{
+                'routes.admin.navigations.assigngroup' | translate
+              }}</nz-form-label>
+              <nz-form-control>
+                <nz-transfer
+                  [nzDataSource]="roles"
+                  (nzChange)="onChangeRoles($event)"
+                  [nzTitles]="[
+                    'routes.admin.role.listRoleUnassigned' | translate,
+                    'routes.admin.role.listRole' | translate
+                  ]"
+                ></nz-transfer>
+              </nz-form-control>
+            </nz-form-item>
+            <p *ngIf="!selectRoles?.length" class="-mt-2 text-red-500 text-center text-base font-semibold">
+              {{ 'routes.admin.user.Please leave at least 1 role for the user' | translate }}
+            </p>
+            <div class="flex justify-end">
+              <g-button
+                [disabled]="checkDisable(user)"
+                [text]="'routes.admin.navigations.save' | translate"
+                (click)="putAssignRole()"
+                [extendClass]="!selectRoles?.length ? 'cursor-not-allowed' : ''"
+              ></g-button>
+            </div>
+          </ng-container>
+        </nz-tab>
+        <nz-tab *ngIf="admin" [nzTitle]="'routes.admin.user.changePartnerHistory' | translate">
+          <div class="flex justify-between">
+            <p class="font-medium text-black text-lg mb-5">
+              {{ 'routes.admin.user.changePartnerHistory' | translate }}
+            </p>
+          </div>
+          <ng-container *ngIf="user.changePartnerHistory && user.changePartnerHistory.length > 0; else noData">
+            <div *ngFor="let item of user?.changePartnerHistory; let i = index">
+              <div class="p-2 border rounded mb-2">
+                <div>
+                  <h1 class="py-1.5 text-left border-slate-300 font-medium text-gray-900 uppercase tracking-wider">
+                    {{ 'routes.admin.user.timeHistory' | translate }}
+                    <span class="text-black">{{ item.CreatedOnDate | date: 'HH:mm:ss dd/MM/YY' }}</span>
+                  </h1>
+                </div>
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50"></thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left border-slate-300 font-medium text-gray-500 tracking-wider border w-36 bg-gray-100"
+                    >
+                      {{ 'routes.admin.user.Attribute' | translate }}
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left border-slate-300 font-medium text-gray-900 tracking-wider border"
+                    >
+                      {{ 'routes.admin.user.Value' | translate }}
+                    </th>
+                  </tr>
+                  <tbody>
+                    <tr>
+                      <th
+                        scope="col"
+                        class="px-6 py-3 text-left border-slate-300 font-medium text-gray-500 tracking-wider bg-gray-100 border"
+                      >
+                        {{ 'routes.admin.user.Before' | translate }}
+                      </th>
+                      <td class="px-6 whitespace-pre-line bg-white border border-slate-300">
+                        <div class="text-sm text-gray-900">{{ item.PartnerBefor?.Name }}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th
+                        scope="col"
+                        class="px-6 py-3 text-left border-slate-300 font-medium text-gray-500 tracking-wider bg-gray-100 border"
+                      >
+                        {{ 'routes.admin.user.After' | translate }}
+                      </th>
+                      <td class="px-6 whitespace-pre-line bg-white border border-slate-300">
+                        <div class="text-sm text-gray-900">{{ item.PartnerAfter?.Name }}</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #noData>
+            <p class="text-base text-center text-gray-900">{{ 'routes.admin.user.No history' | translate }}</p>
+          </ng-template>
+        </nz-tab>
+        <nz-tab [nzTitle]="'routes.admin.user.brokerNoteHistory' | translate">
+          <div class="flex flex-col md:flex-row justify-between mb-5">
+            <p class="font-medium text-black text-lg">
+              {{ 'routes.admin.user.brokerNoteHistory' | translate }}
+            </p>
+            <g-button
+              *ngIf="user?.brokerNoteHistory"
+              class="flex justify-end mt-2"
+              [routerLink]="['level']"
+              [text]="'routes.admin.user.Update Level' | translate"
+            ></g-button>
+          </div>
+          <p *ngIf="!user?.brokerNoteHistory" class="text-base text-center text-gray-900">
+            {{ 'routes.admin.user.No history' | translate }}
+          </p>
+          <div *ngFor="let item of user?.brokerNoteHistory; let i = index">
+            <div [ngClass]="{ hidden: item.Type == 'DOWN_GRADE' }" class="p-2 border rounded mb-2">
+              <div>
+                <h1 class="py-1.5 text-left border-slate-300 font-medium text-gray-900 uppercase tracking-wider">
+                  {{ 'routes.admin.user.timeHistory' | translate }}
+                  <span class="text-black">{{ item.CreatedOnDate | date: 'HH:mm:ss dd/MM/YY' }}</span>
+                </h1>
+              </div>
+              <table class="w-full divide-y divide-gray-200">
+                <tbody>
+                  <tr>
+                    <th
+                      scope="col"
+                      class="w-48 px-6 py-3 text-left border-slate-300 font-medium text-gray-500 tracking-wider bg-gray-100 border"
+                    >
+                      {{ 'routes.admin.user.brokerExpiresAt' | translate }}
+                    </th>
+                    <td class="px-6 whitespace-pre-line bg-white border border-slate-300">
+                      <div class="text-sm text-gray-900">{{ item.BrokerExpiresAt | date: 'HH:mm:ss dd/MM/YY' }}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="col"
+                      class="w-36 px-6 py-3 text-left border-slate-300 font-medium text-gray-500 tracking-wider bg-gray-100 border"
+                    >
+                      {{ 'routes.admin.user.brokerNote' | translate }}
+                    </th>
+                    <td class="px-6 whitespace-pre-line bg-white border border-slate-300">
+                      <div class="text-sm text-gray-900">{{ item.BrokerNote }}</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </nz-spin>
+</div>

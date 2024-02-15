@@ -1,0 +1,216 @@
+<div *ngIf="transactionsFacade.data$ | async as transaction" class="">
+  <div class="w-full container mx-auto bg-white py-4 flex justify-start gap-3">
+    <button [title]="'routes.admin.station.backToTransactions' | translate" (click)="handleBack()">
+      <i class="las la-arrow-left text-2xl text-blue-600"></i>
+    </button>
+    <h2 class="text-xl font-medium">{{ 'routes.admin.station.transactionDetail' | translate }}</h2>
+  </div>
+
+  <div class="bg-gray-100">
+    <div class="bg-gray-100 container mx-auto min-h-[calc(100vh-128px)] p-5">
+      <div class="mx-auto w-full p-3 bg-white rounded-md shadow-lg">
+        <h2 class="pl-2 text-base font-medium pb-2 border-b border-gray-300">
+          {{ 'routes.admin.station.recordId' | translate }}: {{ transaction.recordId }}
+        </h2>
+        <div class="flex mt-2">
+          <div class="flex flex-col basis-4/12 px-2">
+            <nz-descriptions [nzTitle]="'routes.admin.station.infor' | translate" nzBordered>
+              <nz-descriptions-item
+                *ngIf="transaction.isImport"
+                [nzTitle]="'routes.admin.station.transactionType' | translate"
+                [nzSpan]="3"
+              >
+                {{ 'routes.admin.station.import' | translate }}
+              </nz-descriptions-item>
+              <nz-descriptions-item
+                *ngIf="!transaction.isImport"
+                [nzTitle]="'routes.admin.station.transactionType' | translate"
+                [nzSpan]="3"
+              >
+                {{ 'routes.admin.station.export' | translate }}
+              </nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.recordId' | translate" [nzSpan]="3">{{
+                transaction.recordId
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.plateNumber' | translate" [nzSpan]="2">{{
+                transaction.plateNumber
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.doNumber' | translate" [nzSpan]="1">{{
+                transaction.doNumber
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.seller' | translate" [nzSpan]="3">{{
+                transaction.seller
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.buyer' | translate" [nzSpan]="3">{{
+                transaction.buyer
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.itemName' | translate" [nzSpan]="3">{{
+                transaction.itemName
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.unitPrice' | translate" [nzSpan]="2"
+                >{{ transaction.unitPrice }} VND</nz-descriptions-item
+              >
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.oversizePrice' | translate" [nzSpan]="1"
+                >{{ transaction.oversizePrice }} VND</nz-descriptions-item
+              >
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.netPrice' | translate" [nzSpan]="3"
+                >{{ transaction.netPrice }} VND</nz-descriptions-item
+              >
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.note' | translate" [nzSpan]="3">{{
+                transaction.note
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.stationName' | translate" [nzSpan]="3">{{
+                transaction.stationName
+              }}</nz-descriptions-item>
+              <nz-descriptions-item [nzTitle]="'routes.admin.station.printCount' | translate" [nzSpan]="3">{{
+                transaction.printCount
+              }}</nz-descriptions-item>
+            </nz-descriptions>
+          </div>
+          <div class="flex flex-col basis-3/12 px-2">
+            <div class="mb-2">
+              <nz-descriptions [nzTitle]="'routes.admin.station.weightNumber' | translate" nzBordered>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.firstWeight' | translate" [nzSpan]="3"
+                  >{{ transaction.firstWeight }}kg</nz-descriptions-item
+                >
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.secondWeight' | translate" [nzSpan]="3"
+                  >{{ transaction.secondWeight }}kg</nz-descriptions-item
+                >
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.netWeight' | translate" [nzSpan]="3"
+                  >{{ transaction.netWeight }}kg</nz-descriptions-item
+                >
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.impurityWeight' | translate" [nzSpan]="3"
+                  >{{ transaction.impurityWeight }}kg</nz-descriptions-item
+                >
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.realWeight' | translate" [nzSpan]="3"
+                  >{{ transaction.realWeight }}kg</nz-descriptions-item
+                >
+              </nz-descriptions>
+            </div>
+            <div class="mb-2">
+              <nz-descriptions [nzTitle]="'routes.admin.station.firstWeigh' | translate" nzBordered>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.weighTime' | translate" [nzSpan]="3">{{
+                  transaction.firstWeighTime | date: 'dd/MM/yyyy HH:mm'
+                }}</nz-descriptions-item>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.weighStation' | translate" [nzSpan]="3">{{
+                  transaction.firstWeighStationName
+                }}</nz-descriptions-item>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.weighUserName' | translate" [nzSpan]="3">{{
+                  transaction.firstWeighUserName
+                }}</nz-descriptions-item>
+              </nz-descriptions>
+            </div>
+            <div class="mb-2">
+              <nz-descriptions [nzTitle]="'routes.admin.station.secondWeigh' | translate" nzBordered>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.weighTime' | translate" [nzSpan]="3">{{
+                  transaction.secondWeighTime | date: 'dd/MM/yyyy HH:mm'
+                }}</nz-descriptions-item>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.weighStation' | translate" [nzSpan]="3">{{
+                  transaction.secondWeighStationName
+                }}</nz-descriptions-item>
+                <nz-descriptions-item [nzTitle]="'routes.admin.station.weighUserName' | translate" [nzSpan]="3">{{
+                  transaction.secondWeighUserName
+                }}</nz-descriptions-item>
+              </nz-descriptions>
+            </div>
+          </div>
+
+          <div class="flex flex-col basis-5/12 px-2">
+            <h2 class="text-base font-bold pl-1 mb-1">{{ 'routes.admin.station.firstPhotos' | translate }}</h2>
+            <div class="flex">
+              <div *ngIf="transaction.plateImageIn" class="flex basis-1/2 p-1">
+                <a [href]="transaction.plateImageIn" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.plateImageIn" alt="URL ảnh chụp biển lần 1" />
+                </a>
+              </div>
+              <div *ngIf="transaction.backImageIn" class="flex basis-1/2 p-1">
+                <a [href]="transaction.backImageIn" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.backImageIn" alt="URL ảnh chụp biển lần 2" />
+                </a>
+              </div>
+            </div>
+            <div class="flex">
+              <div *ngIf="transaction.trunkImageIn" class="flex basis-1/2 p-1">
+                <a [href]="transaction.trunkImageIn" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.trunkImageIn" alt="URL ảnh chụp thùng lần 1" />
+                </a>
+              </div>
+              <div *ngIf="transaction.overviewImageIn" class="flex basis-1/2 p-1">
+                <a [href]="transaction.overviewImageIn" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.overviewImageIn" alt="URL ảnh chụp biển lần 2" />
+                </a>
+              </div>
+            </div>
+
+            <h2 class="text-base font-bold pl-1 mb-1 mt-2">{{ 'routes.admin.station.secondPhotos' | translate }}</h2>
+            <div class="flex">
+              <div *ngIf="transaction.plateImageOut" class="flex basis-1/2 p-1">
+                <a [href]="transaction.plateImageOut" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.plateImageOut" alt="URL ảnh chụp biển lần 1" />
+                </a>
+              </div>
+              <div *ngIf="transaction.backImageOut" class="flex basis-1/2 p-1">
+                <a [href]="transaction.backImageOut" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.backImageOut" alt="URL ảnh chụp biển lần 2" />
+                </a>
+              </div>
+            </div>
+            <div class="flex">
+              <div *ngIf="transaction.trunkImageOut" class="flex basis-1/2 p-1">
+                <a [href]="transaction.trunkImageOut" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.trunkImageOut" alt="URL ảnh chụp thùng lần 1" />
+                </a>
+              </div>
+              <div *ngIf="transaction.overviewImageOut" class="flex basis-1/2 p-1">
+                <a [href]="transaction.overviewImageOut" class="glightbox" data-zoomable="true" data-draggable="false">
+                  <img [src]="transaction.overviewImageOut" alt="URL ảnh chụp biển lần 2" />
+                </a>
+              </div>
+            </div>
+
+            <!-- Upload Attachments -->
+            <nz-upload
+              (nzChange)="handleUpload($event)"
+              [nzAction]="urlUpload"
+              nzListType="picture"
+              [(nzFileList)]="listUpload"
+              [nzPreview]="handlePreview"
+              [nzRemove]="handleRemove"
+              [nzShowButton]="true"
+              [nzShowUploadList]="{ showRemoveIcon: true, showDownloadIcon: true }"
+            >
+              <div class="h-6">
+                <i class="las la-2x la-upload"></i>
+                <div>{{ this.infoUpload?.name }}</div>
+              </div>
+            </nz-upload>
+            <g-modal
+              [keyboard]="true"
+              [visible]="previewVisible"
+              [contentModal]="modalContent"
+              [notFooter]="true"
+              (clickCancel)="previewVisible = false"
+            >
+              <ng-template #modalContent>
+                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+              </ng-template>
+            </g-modal>
+          </div>
+        </div>
+
+        <pre class="hidden">{{this.transactionsFacade.listAttachments$ | async | json}}</pre>
+
+        <!-- Chart -->
+        <div *ngIf="!data.isImport">
+          <h3 class="text-base font-semibold mb-2 mt-4 pl-2">Biểu đồ số cân tự động</h3>
+          <div
+            id="radioOfAutoScaleNumberChart"
+            [ngStyle]="{
+              height: listAutoScaleNumberChart?.stage2 && listAutoScaleNumberChart?.stage2.length > 0 ? '700px' : '400px'
+            }"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

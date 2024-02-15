@@ -1,0 +1,40 @@
+<section class="p-4">
+  <div class="bg-white w-[1024px] 4xl:w-[1344px] mx-auto">
+    <h1 class="text-2xl font-semibold my-2">Danh sách trạm cân</h1>
+    <div class="flex flex-wrap items-end gap-2 justify-between">
+      <div class="flex flex-wrap items-center gap-2">
+        <!-- Search Input -->
+        <div class="flex flex-col items-start">
+          <nz-form-label class="font-medium">{{ 'components.data-table.search' | translate }}</nz-form-label>
+          <nz-form-control class="w-full">
+            <div class="relative">
+              <input
+                type="text"
+                class="sm:w-60 h-8 rounded-md text-gray-700 bg-white border border-solid border-gray-200 pr-9 pl-4 hover:ring-1 hover:ring-blue-500 focus-visible:outline-blue-300"
+                placeholder="{{ 'components.data-table.pleaseEnterValueToSearch' | translate }}"
+                [(ngModel)]="fullTextSearch"
+                (change)="onSearch(fullTextSearch)"
+              />
+              <i class="text-lg las la-search absolute top-1/2 -translate-y-1/2 right-2 z-[1]"></i>
+            </div>
+          </nz-form-control>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-100 flex">
+  <div class="flex flex-wrap gap-4 p-4 min-h-[calc(100vh-180px)] mx-auto">
+    <div class="" *ngFor="let station of this.stationFacade.list$ | async; index as i">
+      <div
+        (click)="onClick(station.id, station.name)"
+        class="4xl:w-64 w-48 h-80 4xl:p-4 p-3 border-gray-400 rounded-lg bg-white shadow-md hover:shadow-2xl hover:cursor-pointer"
+      >
+        <img src="{{ station.avatar }}" alt="" />
+        <h2 class="my-2 font-semibold text-base">{{ i + 1 }}. {{ station.name }}</h2>
+        <p class="text-gray-400 text-sm leading-6">{{ station.address }}</p>
+      </div>
+    </div>
+  </div>
+</section>

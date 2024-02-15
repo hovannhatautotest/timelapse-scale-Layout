@@ -1,0 +1,23 @@
+stages:
+  - test
+
+.test:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:latest
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
+  script:
+    - docker-compose -f docker-test.yml up -d
+    - docker-compose -f docker-test.yml exec -T test npm run lint
+    - docker-compose -f docker-test.yml exec -T test npm run lint
+    - docker-compose -f docker-test.yml exec -T test robot -d test/result test/testcases/login.robot
+
+test-dev:
+  extends: .test
+  only:
+    - Layout
+    - merge_requests

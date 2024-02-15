@@ -1,0 +1,269 @@
+<div [id]="id" class="relative">
+  <div class="relative">
+    <div class="w-1 h-full bg-gray-300 cursor-ew-resize hover:bg-red-500 absolute left-1/2 -ml-0.5 drag-side"></div>
+    <div class="w-full flex gap-0.5">
+      <div class="left overflow-hidden" [ngStyle]="{ flexBasis: '50%' }">
+        <div class="left-scroll overflow-x-hidden">
+          <table class="head min-w-[600px]">
+            <thead>
+              <tr>
+                <th align="left" class="capitalize border px-4 h-12 text-xs relative truncate">
+                  Product Release
+                  <!--                <div class="w-0.5 h-12 absolute right-0 top-0 cursor-ew-resize drag"></div>-->
+                </th>
+                <th align="left" class="capitalize border px-4 h-12 text-xs relative truncate">
+                  Assignee
+                  <!--                <div class="w-0.5 h-12 absolute right-0 top-0 cursor-ew-resize drag"></div>-->
+                </th>
+                <th align="left" class="capitalize border px-4 h-12 text-xs relative truncate">
+                  Status
+                  <!--                <div class="w-0.5 h-12 absolute right-0 top-0 cursor-ew-resize drag"></div>-->
+                </th>
+                <th align="left" class="capitalize border px-4 h-12 text-xs relative truncate">
+                  Priority
+                  <!--                <div class="w-0.5 h-12 absolute right-0 top-0 cursor-ew-resize drag"></div>-->
+                </th>
+                <th align="left" class="capitalize border px-4 h-12 text-xs relative truncate">
+                  Planned
+                  <!--                <div class="w-0.5 h-12 absolute right-0 top-0 cursor-ew-resize drag"></div>-->
+                </th>
+                <th align="left" class="capitalize border px-4 h-12 text-xs truncate">Work Log</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="overflow-scroll" [attr.data-scroll-x]="'.left-scroll'" (scroll)="handleScroll($event)">
+          <table class="body min-w-[600px] border-b">
+            <tbody>
+              <ng-template ngFor let-item let-index="index" [ngForOf]="task">
+                <tr
+                  (mouseover)="handleHover($event)"
+                  (mouseout)="handleHover($event)"
+                  [attr.data-index]="index"
+                  [attr.data-level]="item.level"
+                >
+                  <td class="border-x pl-5 py-0 h-6 overflow-hidden">
+                    <div
+                      class="flex items-center gap-1"
+                      [ngStyle]="{ paddingLeft: item.level * (widthColumnDay / perRow) + 'px' }"
+                    >
+                      <i
+                        *ngIf="!!task[index + 1] && task[index + 1].level > item.level"
+                        class="las la-angle-right text-base -ml-5 cursor-pointer rotate-90"
+                        (click)="handleCollapse($event)"
+                      ></i>
+                      <span class="truncate">{{ item.name }}</span>
+                    </div>
+                  </td>
+                  <td class="border-x px-4 py-0 h-6 truncate">{{ item.assignee }}</td>
+                  <td
+                    class="border-x px-4 py-0 h-6 text-white truncate"
+                    [ngClass]="{
+                      'bg-blue-600': item.status === 'In Progress',
+                      'bg-green-600': item.status === 'Completed',
+                      'bg-gray-600': item.status === 'On Hold'
+                    }"
+                  >
+                    {{ item.status }}
+                  </td>
+                  <td
+                    class="border-x px-4 py-0 h-6 text-white truncate"
+                    [ngClass]="{
+                      'bg-red-500': item.priority === 'Critical',
+                      'bg-orange-500': item.priority === 'High',
+                      'bg-yellow-500': item.priority === 'Normal'
+                    }"
+                  >
+                    {{ item.priority }}
+                  </td>
+                  <td class="border-x px-4 py-0 h-6 truncate">{{ item.planned }} {{ item.planned ? 'hours' : '' }}</td>
+                  <td class="border-x px-4 py-0 h-6 truncate">{{ item.work }} {{ item.work ? 'days' : '' }}</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="right relative overflow-hidden" [ngStyle]="{ flexBasis: '50%' }">
+        <div class="right-scroll overflow-x-hidden" [ngStyle]="{ paddingRight: getScrollBarWidth() + 'px' }">
+          <table class="w-full min-w-[600px] border-b" [ngStyle]="{ width: date.total * widthColumnDay + 'px' }">
+            <thead>
+              <tr>
+                <ng-template ngFor let-year [ngForOf]="objectKeys(date.obj)">
+                  <ng-template ngFor let-month [ngForOf]="objectKeys(date.obj[year])">
+                    <th
+                      align="left"
+                      class="capitalize border-l border-r border-t px-4 h-6 text-xs"
+                      [ngStyle]="{ width: widthGantt(year, month) }"
+                    >
+                      {{ date.obj[year][month][0].format('MMMM') }} {{ year }}
+                    </th>
+                  </ng-template>
+                </ng-template>
+              </tr>
+            </thead>
+          </table>
+          <table class="w-full min-w-[600px] border-b" [ngStyle]="{ width: date.total * widthColumnDay + 'px' }">
+            <thead>
+              <tr>
+                <ng-template ngFor let-year [ngForOf]="objectKeys(date.obj)">
+                  <ng-template ngFor let-month [ngForOf]="objectKeys(date.obj[year])">
+                    <ng-template ngFor let-day [ngForOf]="date.obj[year][month]">
+                      <th
+                        class="capitalize border-x font-normal h-6 text-xs"
+                        [ngStyle]="{ width: widthColumnDay + 'px' }"
+                      >
+                        {{ day.format('DD') }}
+                      </th>
+                    </ng-template>
+                  </ng-template>
+                </ng-template>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="overflow-scroll relative" [attr.data-scroll-x]="'.right-scroll'" (scroll)="handleScroll($event)">
+          <div
+            class="event h-full absolute top-0 left-0 flex z-10"
+            [ngStyle]="{ width: date.total * widthColumnDay + 'px' }"
+          >
+            <ng-template ngFor let-item let-index="index" [ngForOf]="event">
+              <div
+                *ngIf="item.endDate"
+                class="bg-gray-200 h-full absolute flex items-center justify-center text-gray-400"
+                [ngStyle]="{
+                  width: (item.endDate.diff(item.startDate, 'day') + 1) * (widthColumnDay / perRow) + 'px',
+                  left: item.startDate.diff(dateStart, 'day') * (widthColumnDay / perRow) + 'px'
+                }"
+              >
+                <div
+                  class="rotate-90 whitespace-nowrap text-center"
+                  [ngStyle]="{ marginTop: -item.name.length * 6 + 'px' }"
+                >
+                  {{ item.name }}
+                </div>
+              </div>
+              <div
+                *ngIf="!item.endDate"
+                class="border-red-600 border-l border-dashed h-full absolute flex justify-center items-center"
+                [ngStyle]="{ left: item.startDate.diff(dateStart, 'day') * (widthColumnDay / perRow) + 'px' }"
+              >
+                <div class="px-2 py-1 bg-red-500 text-white rounded-r-xl">{{ item.name }}</div>
+              </div>
+            </ng-template>
+          </div>
+          <svg
+            class="absolute top-0 left-0 z-10"
+            [ngStyle]="{
+              width: date.total * widthColumnDay + 'px',
+              height: task.filter(filterHidden).length * 24 + 'px'
+            }"
+          >
+            <ng-template ngFor let-item let-i="index" [ngForOf]="task.filter(filterHidden)">
+              <ng-container *ngIf="!item.hidden && item.success">
+                <ng-template ngFor let-id [ngForOf]="item.success.split(',')">
+                  <g>
+                    <path
+                      [attr.d]="renderPath(item, i, id)"
+                      fill="transparent"
+                      stroke="black"
+                      stroke-width="1"
+                      [attr.aria-label]="item.name"
+                      tabIndex="-1"
+                    ></path>
+                    <path [attr.d]="renderPath(item, i, id, 'arrow')" [attr.aria-label]="item.name"></path>
+                  </g>
+                </ng-template>
+              </ng-container>
+            </ng-template>
+          </svg>
+          <div class="task absolute top-0 left-0 flex z-10" [ngStyle]="{ width: date.total * widthColumnDay + 'px' }">
+            <ng-template ngFor let-item let-index="index" [ngForOf]="task">
+              <ng-container *ngIf="!item.hidden">
+                <div
+                  *ngIf="item.endDate && item.percent; else elseBlock"
+                  class="absolute"
+                  [ngStyle]="{
+                    top: increaseIndexTask(index) * 24 + 4 + 'px',
+                    left: item.startDate.diff(dateStart, 'day') * (widthColumnDay / perRow) + 'px'
+                  }"
+                >
+                  <div
+                    class="z-10 overflow-hidden"
+                    [ngClass]="{
+                      'bg-gray-400': !!task[index + 1] && task[index + 1].level > item.level,
+                      'rounded-md bg-blue-400': !task[index + 1] || task[index + 1].level <= item.level
+                    }"
+                    [ngStyle]="{
+                      width: (item.endDate.diff(item.startDate, 'day') + 1) * (widthColumnDay / perRow) + 'px'
+                    }"
+                  >
+                    <div
+                      class="text-center text-white text-xs h-4"
+                      [ngClass]="{
+                        'bg-gray-600': !!task[index + 1] && task[index + 1].level > item.level,
+                        'bg-blue-600': !task[index + 1] || task[index + 1].level <= item.level
+                      }"
+                      [ngStyle]="{ width: item.percent + '%' }"
+                    ></div>
+                  </div>
+                  <div
+                    *ngIf="item.endDate"
+                    class="absolute top-0.5 text-xs text-gray-400"
+                    [ngStyle]="{
+                      left: 5 + (item.endDate.diff(item.startDate, 'day') + 1) * (widthColumnDay / perRow) + 'px'
+                    }"
+                  >
+                    <!--                    <div-->
+                    <!--                      class="absolute top-0 text-xs text-gray-400"-->
+                    <!--                      [ngStyle]="{ left: 5 + (item.endDate.diff(item.startDate, 'day') + 1) * (widthColumnDay / perRow) + 'px' }"-->
+                    <!--                    >-->
+                    <!--                      {{ item.percent }}%-->
+                    <!--                    </div>-->
+                  </div>
+                </div>
+                <ng-template #elseBlock>
+                  <div
+                    class="absolute"
+                    [ngStyle]="{
+                      top: increaseIndexTask(index) * 24 + 4 + 'px',
+                      left:
+                        item.startDate.diff(dateStart, 'day') * (widthColumnDay / perRow) +
+                        (item.endDate || index === 0 ? 0 : widthColumnDay / perRow) +
+                        'px'
+                    }"
+                  >
+                    <div class="absolute top-1 -left-1 z-10 h-3 w-3 bg-black rotate-45"></div>
+                    <!--                    <div class="absolute -top-0.5 left-3 whitespace-nowrap">{{ item.name }}</div>-->
+                  </div>
+                </ng-template>
+              </ng-container>
+            </ng-template>
+          </div>
+          <table class="min-w-[600px] border-b -z-10" [ngStyle]="{ width: date.total * widthColumnDay + 'px' }">
+            <tbody>
+              <ng-template ngFor let-item let-index="index" [ngForOf]="task">
+                <tr
+                  (mouseover)="handleHover($event)"
+                  (mouseout)="handleHover($event)"
+                  [attr.data-index]="index"
+                  [attr.data-level]="item.level"
+                >
+                  <ng-template ngFor let-year [ngForOf]="objectKeys(date.obj)">
+                    <ng-template ngFor let-month [ngForOf]="objectKeys(date.obj[year])">
+                      <ng-template ngFor let-day [ngForOf]="date.obj[year][month]">
+                        <td class="capitalize border-x font-normal h-6 relative py-0"></td>
+                      </ng-template>
+                    </ng-template>
+                  </ng-template>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="drag-vertical w-full h-1 cursor-ns-resize hover:bg-red-500 absolute bottom-0"></div>
+</div>

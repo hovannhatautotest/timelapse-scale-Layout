@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.1 on win32)" generated="2024-01-31T17:57:58.447695" rpa="false" schemaversion="5">
+<suite id="s1" name="1-Sign Up" source="C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\testcases\1-sign_up.robot">
+<test id="s1-t1" name="SI_03. Verify showing password when click on eye icon in &quot;Xác nhận mật khẩu&quot; field" line="28">
+<kw name="Setup" owner="common2" type="SETUP">
+<kw name="Set Browser Timeout" owner="Browser">
+<arg>${BROWSER_TIMEOUT}</arg>
+<tag>Config</tag>
+<tag>Setter</tag>
+<doc>Sets the timeout used by most input and getter keywords.</doc>
+<status status="PASS" start="2024-01-31T17:58:00.905971" elapsed="0.056068"/>
+</kw>
+<kw name="New Browser" owner="Browser">
+<msg time="2024-01-31T17:58:00.963640" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\Admin\\Desktop\\timelapse-scale-Layout\\browser\\traces\\b228ac50-4beb-44c8-8756-6377e573ad09"}</msg>
+<msg time="2024-01-31T17:58:02.095606" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\Admin\\Desktop\\timelapse-scale-Layout\\browser\\traces\\b228ac50-4beb-44c8-8756-6377e573ad09"}</msg>
+<arg>${BROWSER}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2024-01-31T17:58:00.962544" elapsed="1.134062"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2024-01-31T17:58:06.970855" level="INFO">Successfully initialized new page object and opened url: http://dev1.geneat.vn:7105/</msg>
+<msg time="2024-01-31T17:58:06.970855" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${URL_DEFAULT}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2024-01-31T17:58:02.096706" elapsed="4.874149"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-01-31T17:58:06.972847" level="INFO">${STATE} = {}</msg>
+<var>${STATE}</var>
+<arg>json.loads('''{}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-01-31T17:58:06.971845" elapsed="0.002002"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:00.903818" elapsed="6.070029"/>
+</kw>
+<kw name="When Go to sign up page">
+<kw name="When Click &quot;Đăng ký&quot; button" owner="common2" source_name="Click &quot;${text}&quot; button">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.088913" level="INFO">Slept 100 milliseconds.</msg>
+<arg>${SHOULD_TIMEOUT}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-01-31T17:58:06.988331" elapsed="0.101582"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2024-01-31T17:58:07.212065" level="INFO">${cnt} = 0</msg>
+<var>${cnt}</var>
+<arg>//button[@title = "${text}"]</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.093394" elapsed="0.118671"/>
+</kw>
+<if>
+<branch type="IF" condition="${cnt} &gt; 0">
+<kw name="Click" owner="Browser">
+<arg>xpath=//button[@title = "${text}"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.213066" elapsed="0.000999"/>
+</kw>
+<kw name="Click Confirm To Action" owner="common2">
+<status status="NOT RUN" start="2024-01-31T17:58:07.215064" elapsed="0.000000"/>
+</kw>
+<kw name="Scroll By" owner="Browser">
+<arg>${None}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Scrolls an element or the page relative from current position by the given values.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.216062" elapsed="0.001006"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.213066" elapsed="0.004002"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click" owner="Browser">
+<arg>//span[contains(text(),"${text}")]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.218066" elapsed="0.269446"/>
+</kw>
+<kw name="Click Confirm To Action" owner="common2">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.591508" level="INFO">Slept 100 milliseconds.</msg>
+<arg>${SHOULD_TIMEOUT}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.489508" elapsed="0.102000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.592580" level="INFO">${element} = xpath=//*[contains(@class, "ant-popover")]//*[contains(@class, "ant-btn-primary")]</msg>
+<var>${element}</var>
+<arg>xpath=//*[contains(@class, "ant-popover")]//*[contains(@class, "ant-btn-primary")]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.591508" elapsed="0.001072"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2024-01-31T17:58:07.638646" level="INFO">${count} = 0</msg>
+<var>${count}</var>
+<arg>${element}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.592580" elapsed="0.046066"/>
+</kw>
+<if>
+<branch type="IF" condition="${count} &gt; 0">
+<kw name="Click" owner="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.639762" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${SHOULD_TIMEOUT}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.640879" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Spin" owner="common2">
+<status status="NOT RUN" start="2024-01-31T17:58:07.640879" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.638646" elapsed="0.002233"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:07.638646" elapsed="0.003290"/>
+</if>
+<status status="PASS" start="2024-01-31T17:58:07.488510" elapsed="0.153491"/>
+</kw>
+<kw name="Scroll By" owner="Browser">
+<msg time="2024-01-31T17:58:07.677313" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2024-01-31T17:58:07.677313" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2024-01-31T17:58:07.697204" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2024-01-31T17:58:07.697204" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2024-01-31T17:58:07.710654" level="INFO">JavaScript executed successfully.</msg>
+<arg>${None}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Scrolls an element or the page relative from current position by the given values.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.642509" elapsed="0.068145"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:07.218066" elapsed="0.492588"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:07.212065" elapsed="0.498589"/>
+</if>
+<status status="PASS" start="2024-01-31T17:58:06.986345" elapsed="0.724309"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:06.981334" elapsed="0.729320"/>
+</kw>
+<kw name="And Enter &quot;test name&quot; in placeholder &quot;Xác nhận mật khẩu&quot; with &quot;_RANDOM_&quot;" source_name="Enter &quot;${type}&quot; in placeholder &quot;${placeholder}&quot; with &quot;${text}&quot;">
+<kw name="Wait Until Element Spin" owner="common2">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.817179" level="INFO">Slept 100 milliseconds.</msg>
+<arg>${SHOULD_TIMEOUT}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.714794" elapsed="0.102385"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.818411" level="INFO">${element} = xpath=//*[contains(@class, "ant-spin-spinning")]</msg>
+<var>${element}</var>
+<arg>xpath=//*[contains(@class, "ant-spin-spinning")]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.817179" elapsed="0.001232"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2024-01-31T17:58:07.853682" level="INFO">${count} = 0</msg>
+<var>${count}</var>
+<arg>${element}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.818411" elapsed="0.036273"/>
+</kw>
+<if>
+<branch type="IF" condition="${count} &gt; 0">
+<kw name="Wait Until Page Does Not Contain Element" owner="common2">
+<arg>${element}</arg>
+<status status="NOT RUN" start="2024-01-31T17:58:07.855687" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.854684" elapsed="0.001003"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:07.854684" elapsed="0.001003"/>
+</if>
+<status status="PASS" start="2024-01-31T17:58:07.713794" elapsed="0.141893"/>
+</kw>
+<kw name="Get Random Text" owner="common2">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.858931" level="INFO">${symbol} = _RANDOM_</msg>
+<var>${symbol}</var>
+<arg>_RANDOM_</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.858853" elapsed="0.000078"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.861289" level="INFO">${new_text} = </msg>
+<var>${new_text}</var>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.860037" elapsed="0.001252"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2024-01-31T17:58:07.863913" level="INFO">${containsS} = []</msg>
+<var>${containsS}</var>
+<arg>${text}</arg>
+<arg>_@(.+)@_</arg>
+<arg>1</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.862375" elapsed="0.001538"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.865696" level="INFO">Length is 0.</msg>
+<msg time="2024-01-31T17:58:07.865696" level="INFO">${cntS} = 0</msg>
+<var>${cntS}</var>
+<arg>${containsS}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.865501" elapsed="0.000195"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2024-01-31T17:58:07.867697" level="INFO">${contains} = ['_RANDOM_']</msg>
+<var>${contains}</var>
+<arg>${text}</arg>
+<arg>${symbol}</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.866696" elapsed="0.001001"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.868695" level="INFO">Length is 1.</msg>
+<msg time="2024-01-31T17:58:07.868695" level="INFO">${cnt} = 1</msg>
+<var>${cnt}</var>
+<arg>${contains}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.867697" elapsed="0.000998"/>
+</kw>
+<if>
+<branch type="IF" condition="${cntS} &gt; 0">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${new_text}</var>
+<arg>${STATE["${containsS[0]}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.869882" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${symbol}</var>
+<arg>_@${containsS[0]}@_</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.870982" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.869696" elapsed="0.001286"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'test name'">
+<kw name="Sentence" owner="FakerLibrary">
+<msg time="2024-01-31T17:58:07.872579" level="INFO">${random} = Fugit quibusdam.</msg>
+<var>${random}</var>
+<arg>nb_words=3</arg>
+<doc>Generate a sentence.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.872074" elapsed="0.000505"/>
+</kw>
+<kw name="Split String" owner="String">
+<msg time="2024-01-31T17:58:07.873983" level="INFO">${words} = ['SI_03.', 'Verify', 'showing', 'password', 'when', 'click', 'on', 'eye', 'icon', 'in', '"Xác', 'nhận', 'mật', 'khẩu"', 'field']</msg>
+<var>${words}</var>
+<arg>${TEST NAME}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.873983" elapsed="0.001005"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.877288" level="INFO">${new_text} = SI_03. Fugit quibusdam.</msg>
+<var>${new_text}</var>
+<arg>${words[0]} ${random}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.875086" elapsed="0.002202"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:07.870982" elapsed="0.006306"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'number'">
+<kw name="Random Int" owner="FakerLibrary">
+<var>${new_text}</var>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.878400" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<var>${new_text}</var>
+<arg>${new_text}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.879493" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.878291" elapsed="0.001202"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'percentage'">
+<kw name="Random Int" owner="FakerLibrary">
+<var>${new_text}</var>
+<arg>max=100</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.879493" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<var>${new_text}</var>
+<arg>${new_text}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.880598" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.879493" elapsed="0.001105"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'paragraph'">
+<kw name="Paragraph" owner="FakerLibrary">
+<var>${new_text}</var>
+<doc>Generate a paragraph.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.881600" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.880598" elapsed="0.001002"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'email'">
+<kw name="Email" owner="FakerLibrary">
+<var>${new_text}</var>
+<status status="NOT RUN" start="2024-01-31T17:58:07.882599" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.882599" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'phone'">
+<kw name="Random Int" owner="FakerLibrary">
+<var>${new_text}</var>
+<arg>min=20000000</arg>
+<arg>max=99999999</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.883597" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<var>${new_text}</var>
+<arg>${new_text}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.884780" elapsed="0.000000"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<var>${List}</var>
+<arg>3</arg>
+<arg>7</arg>
+<arg>8</arg>
+<arg>9</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.885810" elapsed="0.000170"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${2nd_number}</var>
+<arg>random.choice($List)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.885980" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<var>${2nd_number}</var>
+<arg>${2nd_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.887100" elapsed="0.000000"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<var>${new_text}</var>
+<arg>SEPARATOR=</arg>
+<arg>0</arg>
+<arg>${2nd_number}</arg>
+<arg>${new_text}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.887100" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.882599" elapsed="0.005503"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'color'">
+<kw name="Safe Hex Color" owner="FakerLibrary">
+<var>${new_text}</var>
+<doc>Generate a web-safe color formatted as a hex triplet.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.888190" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.888190" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and &quot;${type}&quot; == 'password'">
+<kw name="Password" owner="FakerLibrary">
+<var>${new_text}</var>
+<arg>10</arg>
+<arg>True</arg>
+<arg>True</arg>
+<arg>True</arg>
+<arg>True</arg>
+<doc>Generate a random password of the specified ``length``.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.888190" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.888190" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'date'">
+<kw name="Date" owner="FakerLibrary">
+<var>${new_text}</var>
+<arg>pattern=%d-%m-%Y</arg>
+<doc>Get a date string between January 1, 1970 and now.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.889315" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.888190" elapsed="0.001125"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'word'">
+<kw name="Sentence" owner="FakerLibrary">
+<var>${new_text}</var>
+<arg>nb_words=2</arg>
+<doc>Generate a sentence.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.890317" elapsed="0.000099"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.889315" elapsed="0.001101"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0 and '${type}' == 'title'">
+<kw name="Text" owner="FakerLibrary">
+<var>${word_1}</var>
+<arg>max_nb_chars=15</arg>
+<doc>Generate a text string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.890416" elapsed="0.000000"/>
+</kw>
+<kw name="Text" owner="FakerLibrary">
+<var>${word_2}</var>
+<arg>max_nb_chars=15</arg>
+<doc>Generate a text string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.890416" elapsed="0.000000"/>
+</kw>
+<kw name="Text" owner="FakerLibrary">
+<var>${word_3}</var>
+<arg>max_nb_chars=15</arg>
+<doc>Generate a text string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.891496" elapsed="0.000000"/>
+</kw>
+<kw name="Text" owner="FakerLibrary">
+<var>${word_4}</var>
+<arg>max_nb_chars=15</arg>
+<doc>Generate a text string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.891496" elapsed="0.000000"/>
+</kw>
+<kw name="Text" owner="FakerLibrary">
+<var>${word_5}</var>
+<arg>max_nb_chars=15</arg>
+<doc>Generate a text string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.891496" elapsed="0.000000"/>
+</kw>
+<kw name="Split String" owner="String">
+<var>${words}</var>
+<arg>${TEST NAME}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.891496" elapsed="0.000000"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<var>${new_text}</var>
+<arg>${words[0]}</arg>
+<arg>${word_1}</arg>
+<arg>${word_2}</arg>
+<arg>${word_3}</arg>
+<arg>${word_4}</arg>
+<arg>${word_5}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.892585" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.890416" elapsed="0.002169"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 0">
+<kw name="Sentence" owner="FakerLibrary">
+<var>${new_text}</var>
+<doc>Generate a sentence.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.892585" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.892585" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:07.869696" elapsed="0.022889"/>
+</if>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.893584" level="INFO">Length is 8.</msg>
+<msg time="2024-01-31T17:58:07.893584" level="INFO">${cnt} = 8</msg>
+<var>${cnt}</var>
+<arg>${text}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.892585" elapsed="0.000999"/>
+</kw>
+<if>
+<branch type="IF" condition="${cnt} &gt; 0">
+<kw name="Replace String" owner="String">
+<msg time="2024-01-31T17:58:07.894687" level="INFO">${text} = SI_03. Fugit quibusdam.</msg>
+<var>${text}</var>
+<arg>${text}</arg>
+<arg>${symbol}</arg>
+<arg>${new_text}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.893584" elapsed="0.001103"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:07.893584" elapsed="0.001103"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:07.893584" elapsed="0.001103"/>
+</if>
+<return>
+<value>${text}</value>
+<status status="PASS" start="2024-01-31T17:58:07.894687" elapsed="0.000000"/>
+</return>
+<msg time="2024-01-31T17:58:07.895784" level="INFO">${text} = SI_03. Fugit quibusdam.</msg>
+<var>${text}</var>
+<arg>${type}</arg>
+<arg>${text}</arg>
+<status status="PASS" start="2024-01-31T17:58:07.857682" elapsed="0.038102"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2024-01-31T17:58:07.906210" level="INFO">${cnt} = 1</msg>
+<var>${cnt}</var>
+<arg>//input[@placeholder='${placeholder}']</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.895784" elapsed="0.010426"/>
+</kw>
+<if>
+<branch type="IF" condition="${cnt} &gt; 1 and '${placeholder}' == 'Số điện thoại'">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${element}</var>
+<arg>//input[@placeholder='${placeholder}' and @id='phoneRegister']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.907298" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.906210" elapsed="0.001088"/>
+</branch>
+<branch type="ELSE IF" condition="${cnt} &gt; 1 and '${placeholder}' == 'Mật khẩu'">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${element}</var>
+<arg>//input[@placeholder='${placeholder}' and @id='password-register']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:07.907298" elapsed="0.001004"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:07.907298" elapsed="0.001089"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:07.908387" level="INFO">${element} = //input[@placeholder='Xác nhận mật khẩu']</msg>
+<var>${element}</var>
+<arg>//input[@placeholder='${placeholder}']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.908387" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:07.908387" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:07.906210" elapsed="0.002177"/>
+</if>
+<kw name="Clear Text" owner="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears the text field found by ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.909469" elapsed="0.049388"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2024-01-31T17:58:07.962794" level="INFO">Fills the text 'SI_03. Fugit quibusdam.' in the given field.</msg>
+<arg>${element}</arg>
+<arg>${text}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:07.959916" elapsed="0.071258"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-01-31T17:58:08.032173" level="INFO">Length is 23.</msg>
+<msg time="2024-01-31T17:58:08.032173" level="INFO">${cnt} = 23</msg>
+<var>${cnt}</var>
+<arg>${text}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.032173" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${cnt} &gt; 0">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:08.035171" level="INFO">${STATE["Xác nhận mật khẩu"]} = SI_03. Fugit quibusdam.</msg>
+<arg>\${STATE["${placeholder}"]}</arg>
+<arg>${text}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.034172" elapsed="0.000999"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.033174" elapsed="0.001997"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:08.033174" elapsed="0.001997"/>
+</if>
+<status status="PASS" start="2024-01-31T17:58:07.712656" elapsed="0.322515"/>
+</kw>
+<kw name="And Click on eye icon in &quot;Xác nhận mật khẩu&quot; field" source_name="Click on eye icon in &quot;${name}&quot; field">
+<kw name="Get Element Count" owner="Browser">
+<msg time="2024-01-31T17:58:08.048843" level="INFO">${cnt} = 1</msg>
+<var>${cnt}</var>
+<arg>//input[@placeholder='${name}']</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.037170" elapsed="0.011673"/>
+</kw>
+<if>
+<branch type="IF" condition="${cnt} &gt; 1 and '${name}' == 'Mật khẩu'">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${element}</var>
+<arg>//input[@placeholder='${name}' and @id='password-register']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:08.049842" elapsed="0.001000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:08.049842" elapsed="0.001000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:08.051846" level="INFO">${element} = //input[@placeholder='Xác nhận mật khẩu']</msg>
+<var>${element}</var>
+<arg>//input[@placeholder='${name}']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.050842" elapsed="0.001004"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.050842" elapsed="0.001004"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:08.049842" elapsed="0.002004"/>
+</if>
+<kw name="Wait Until Element Is Existent" owner="common2">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2024-01-31T17:58:08.073828" level="INFO">Waited for Element with selector //input[@placeholder='Xác nhận mật khẩu'] at state attached</msg>
+<arg>${locator}</arg>
+<arg>attached</arg>
+<arg>${timeout}</arg>
+<arg>${message}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.053841" elapsed="0.019987"/>
+</kw>
+<arg>${element}</arg>
+<status status="PASS" start="2024-01-31T17:58:08.052840" elapsed="0.021987"/>
+</kw>
+<kw name="Click" owner="Browser">
+<arg>${element}/../i[contains(@class, "la-eye-slash")]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.074827" elapsed="0.081893"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.036170" elapsed="0.120550"/>
+</kw>
+<kw name="Then The hidden password in &quot;Xác nhận mật khẩu&quot; field should be visibled as &quot;_@Xác nhận mật khẩu@_&quot;" source_name="The hidden password in &quot;${name}&quot; field should be visibled as &quot;${text}&quot;">
+<kw name="Check Text" owner="common2">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2024-01-31T17:58:08.160012" level="INFO">${containsS} = ['Xác nhận mật khẩu']</msg>
+<var>${containsS}</var>
+<arg>${text}</arg>
+<arg>_@(.+)@_</arg>
+<arg>1</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.158927" elapsed="0.001085"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-01-31T17:58:08.160012" level="INFO">Length is 1.</msg>
+<msg time="2024-01-31T17:58:08.160012" level="INFO">${cntS} = 1</msg>
+<var>${cntS}</var>
+<arg>${containsS}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.160012" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${cntS} &gt; 0">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:08.162183" level="INFO">${text} = SI_03. Fugit quibusdam.</msg>
+<var>${text}</var>
+<arg>${STATE["${containsS[0]}"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.161097" elapsed="0.001086"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.161097" elapsed="0.001593"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:08.161097" elapsed="0.001593"/>
+</if>
+<return>
+<value>${text}</value>
+<status status="PASS" start="2024-01-31T17:58:08.162690" elapsed="0.000000"/>
+</return>
+<msg time="2024-01-31T17:58:08.162690" level="INFO">${text} = SI_03. Fugit quibusdam.</msg>
+<var>${text}</var>
+<arg>${text}</arg>
+<status status="PASS" start="2024-01-31T17:58:08.158927" elapsed="0.003763"/>
+</kw>
+<if>
+<branch type="IF" condition="'${name}' == 'Mật khẩu'">
+<kw name="Set Variable" owner="BuiltIn">
+<var>${element}</var>
+<arg>//input[@placeholder='${name}' and @id='password-register']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2024-01-31T17:58:08.163855" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-01-31T17:58:08.162690" elapsed="0.001165"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-01-31T17:58:08.164855" level="INFO">${element} = //input[@placeholder='Xác nhận mật khẩu']</msg>
+<var>${element}</var>
+<arg>//input[@placeholder='${name}']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.164855" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.163855" elapsed="0.002002"/>
+</branch>
+<status status="PASS" start="2024-01-31T17:58:08.162690" elapsed="0.003167"/>
+</if>
+<kw name="Get Property" owner="Browser">
+<msg time="2024-01-31T17:58:08.215587" level="INFO">Property: 'text'</msg>
+<arg>${element}</arg>
+<arg>type</arg>
+<arg>==</arg>
+<arg>text</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the ``property`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.165857" elapsed="0.050727"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2024-01-31T17:58:08.259126" level="INFO">Text: 'SI_03. Fugit quibusdam.'</msg>
+<arg>${element}</arg>
+<arg>equal</arg>
+<arg>${text}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.216584" elapsed="0.042542"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.157838" elapsed="0.101288"/>
+</kw>
+<kw name="Tear Down" owner="common2" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2024-01-31T17:58:08.924958" level="INFO">Closed all browsers</msg>
+<arg>ALL</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-01-31T17:58:08.261310" elapsed="0.663648"/>
+</kw>
+<status status="PASS" start="2024-01-31T17:58:08.260223" elapsed="0.664735"/>
+</kw>
+<tag>Main page</tag>
+<status status="PASS" start="2024-01-31T17:58:00.896299" elapsed="8.029736"/>
+</test>
+<status status="PASS" start="2024-01-31T17:57:58.452519" elapsed="10.480172"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Main page</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="1-Sign Up">1-Sign Up</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2024-01-31T17:57:58.438887" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\testcases\1-sign_up.robot' on line 134: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.749065" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 40: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.752848" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 97: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.764847" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 234: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.777775" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 304: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.781030" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 343: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.787608" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 413: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.807630" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 839: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.808707" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 853: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.808707" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 864: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.810892" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 883: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.812300" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 896: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.815948" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 1012: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.817107" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 1021: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-01-31T17:57:58.819381" level="WARN">Error in file 'C:\Users\Admin\Desktop\timelapse-scale-Layout\BDS\keywords\common2.robot' on line 1028: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+</errors>
+</robot>

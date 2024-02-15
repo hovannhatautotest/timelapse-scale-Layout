@@ -1,0 +1,510 @@
+<section class="p-2.5">
+  <div class="py-2 bg-white container mx-auto -intro-x">
+    <div class="flex mb-4">
+      <button
+        [title]="'routes.admin.station.backToTransactions' | translate"
+        (click)="this.router.navigate([this.language + '/station'])"
+      >
+        <i class="las la-arrow-left text-2xl text-blue-600"></i>
+      </button>
+      <h2 class="ml-3 text-xl font-medium">{{ this.stationName }}</h2>
+    </div>
+
+    <nz-tabset
+      nzType="card"
+      [nzSelectedIndex]="this.selectedIndex"
+      (nzSelectedIndexChange)="onSelectedIndexChange($event)"
+    >
+      <nz-tab [nzTitle]="'Biểu đồ'">
+        <nz-spin [nzSpinning]="this.transactionReportsFacade.isLoading$ | async">
+          <div class="gn-mt-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <ng-container
+                [ngTemplateOutlet]="templateFilter"
+                [ngTemplateOutletContext]="{
+                  filter: ['KHACH_HANG', 'DOI_TAC', 'MAT_HANG', 'DATE', 'EXPORT_EXCEL', 'RELOAD']
+                }"
+              ></ng-container>
+            </div>
+          </div>
+          <div class="container mx-auto mt-4">
+            <div class="gn-mt-10" [nzGutter]="[10, 10]" nz-row>
+              <div [nzXXl]="12" nz-col nzSpan="24">
+                <nz-card nzTitle="KL nhập xuất">
+                  <div id="totalGoodsWeightChart" style="height: 300px"></div>
+                </nz-card>
+              </div>
+              <div [nzXXl]="12" nz-col nzSpan="24">
+                <nz-card nzTitle="Số xe nhập xuất">
+                  <div id="totalVehiclesChart" style="height: 300px"></div>
+                </nz-card>
+              </div>
+              <div [nzXXl]="12" nz-col nzSpan="24">
+                <nz-card nzTitle="KL Tạp chất">
+                  <div id="totalImpurityWeightChart" style="height: 300px"></div>
+                </nz-card>
+              </div>
+              <div [nzXXl]="12" nz-col nzSpan="24">
+                <nz-card nzTitle="Tỉ lệ Tạp chất">
+                  <div id="radioOfIWPieChart" style="height: 300px"></div>
+                </nz-card>
+              </div>
+              <div nz-col nzSpan="24">
+                <nz-card nzTitle="Tỉ lệ Tạp chất/ KL nhập (%)">
+                  <div id="radioOfIIGWeightChart" style="height: 300px"></div>
+                </nz-card>
+              </div>
+            </div>
+          </div>
+        </nz-spin>
+      </nz-tab>
+
+      <nz-tab [nzTitle]="'Báo cáo'">
+        <nz-spin [nzSpinning]="this.transactionReportsFacade.isLoading$ | async">
+          <div class="gn-mt-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <ng-container
+                [ngTemplateOutlet]="templateFilter"
+                [ngTemplateOutletContext]="{
+                  filter: ['KHACH_HANG', 'DOI_TAC', 'MAT_HANG', 'DATE', 'EXPORT_EXCEL', 'RELOAD']
+                }"
+              ></ng-container>
+            </div>
+          </div>
+          <div class="container mx-auto mt-4">
+            <nz-collapse>
+              <nz-collapse-panel
+                class="bg-blue-600 text-white"
+                *ngFor="let report of transactionReportsFacade.reports$ | async; index as i"
+                [nzHeader]="report.date"
+                [nzActive]="true"
+              >
+                <nz-descriptions nzBordered [nzColumn]="{ xxl: 4, xl: 4, lg: 2, md: 2, sm: 1, xs: 1 }">
+                  <nz-descriptions-item nzTitle="KL Nhập">{{ report.totalImportGoodsWeight }}</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="KL Xuất">{{ report.totalExportGoodsWeight }}</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="KL Tạp chất">{{ report.totalImpurityWeight }}</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="Tiền nhập">{{ report.totalImportAmount }} VND</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="Số xe nhập">{{ report.totalImportVehicles }}</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="Số xe xuất">{{ report.totalExportVehicles }}</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="Xe chưa cân">{{ report.totalIncompletedVehicles }}</nz-descriptions-item>
+                  <nz-descriptions-item nzTitle="Tiền xuất">{{ report.totalExportAmount }} VND</nz-descriptions-item>
+                </nz-descriptions>
+              </nz-collapse-panel>
+            </nz-collapse>
+          </div>
+        </nz-spin>
+      </nz-tab>
+
+      <nz-tab [nzTitle]="'Nhà cung cấp'">
+        <nz-spin [nzSpinning]="this.transactionReportsFacade.isLoading$ | async">
+          <div class="gn-mt-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <ng-container
+                [ngTemplateOutlet]="templateFilter"
+                [ngTemplateOutletContext]="{
+                  filter: ['DATE', 'RELOAD']
+                }"
+              ></ng-container>
+            </div>
+          </div>
+          <div class="container mx-auto mt-4 boder-1 border-gray-500 min-h-[calc(100vh-280px)] rounded-t-xl overflow-hidden">
+            <div class="w-4/5 rounded-t-xl overflow-hidden">
+              <table class="w-full p-3 border border-gray-100 ">
+                <thead>
+                  <tr class="bg-blue-600">
+                    <th class="p-1 pl-3 text-left text-sm font-normal text-white w-2">#</th>
+                    <th class="px-2 py-2 text-left text-base font-semibold text-white w-40">
+                      {{ 'routes.admin.station.name' | translate }}
+                    </th>
+                    <th class="px-2 py-2 text-left text-base font-semibold text-white w-28">
+                      {{ 'routes.admin.station.totalGoodsWeight' | translate }}
+                    </th>
+                    <th class="px-2 py-2 text-left text-base font-semibold text-white w-28">
+                      {{ 'routes.admin.station.totalImpurityWeight' | translate }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let partner of displayedItems; index as i">
+                  <tr *ngIf="partner" class="hover:bg-red-50 border-b border-gray-100">
+                    <td class="p-1 pl-3 text-left text- font-normal text-gray-600">
+                      {{ (this.currentPageIndex - 1) * this.pageSize + i + 1 }}
+                    </td>
+                    <td class="px-2 py-2 text-left">{{ partner.name }}</td>
+                    <td class="px-2 py-2 text-left">{{ partner.totalGoodsWeight }}</td>
+                    <td class="px-2 py-2 text-left">{{ partner.totalImpurityWeight }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div *ngIf="transactionReportsFacade.partnerReports$ | async as partnerReports" class="container mx-auto">
+                <g-pagination
+                  class="w-full"
+                  [page]="currentPageIndex"
+                  [size]="20"
+                  [total]="partnerReports.length"
+                  (pageIndexChange)="onPageIndexChange($event)"
+                ></g-pagination>
+              </div>
+            </div>
+          </div>
+        </nz-spin>
+      </nz-tab>
+
+      <nz-tab [nzTitle]="'Khách hàng'">
+        <nz-spin [nzSpinning]="this.transactionReportsFacade.isLoading$ | async">
+          <div class="gn-mt-10">
+            <div class="flex flex-wrap items-center gap-2">
+              <ng-container
+                [ngTemplateOutlet]="templateFilter"
+                [ngTemplateOutletContext]="{
+                  filter: ['DATE', 'RELOAD']
+                }"
+              ></ng-container>
+            </div>
+          </div>
+          <div class="container mx-auto mt-4 boder-1 border-gray-500 min-h-[calc(100vh-280px)] rounded-t-xl overflow-hidden">
+            <div class="w-2/3 rounded-t-xl overflow-hidden">
+              <table class="w-full p-3 border border-gray-100">
+                <thead>
+                  <tr class="bg-blue-600 text-white">
+                    <th class="p-1 pl-3 text-left text-sm font-normal w-2">#</th>
+                    <th class="px-2 py-2 text-left text-base font-semibold w-40">
+                      {{ 'routes.admin.station.name' | translate }}
+                    </th>
+                    <th class="px-2 py-2 text-left text-base font-semibold w-28">
+                      {{ 'routes.admin.station.totalGoodsWeight' | translate }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let partner of displayedItems; index as i">
+                  <tr *ngIf="partner" class="hover:bg-red-50 border-b border-gray-100">
+                    <td class="p-1 pl-3 text-left text- font-normal text-gray-600">
+                      {{ (this.currentPageIndex - 1) * this.pageSize + i + 1 }}
+                    </td>
+                    <td class="px-2 py-2 text-left">{{ partner.name }}</td>
+                    <td class="px-2 py-2 text-left">{{ partner.totalGoodsWeight }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div *ngIf="transactionReportsFacade.partnerReports$ | async as partnerReports" class="container mx-auto">
+                <g-pagination
+                  class="w-full"
+                  [page]="currentPageIndex"
+                  [size]="20"
+                  [total]="partnerReports.length"
+                  [pageSizeOptions]="[10, 20, 30, 40]"
+                  (pageIndexChange)="onPageIndexChange($event)"
+                ></g-pagination>
+              </div>
+            </div>
+          </div>
+        </nz-spin>
+      </nz-tab>
+
+      <nz-tab [nzTitle]="'Phiếu cân'">
+        <div class="gn-mt-10">
+          <div class="flex flex-wrap items-center gap-2">
+            <ng-container
+              [ngTemplateOutlet]="templateFilter"
+              [ngTemplateOutletContext]="{
+                filter: ['LOAI_PHIEU', 'KHACH_HANG','DOI_TAC','MAT_HANG','DATE', 'SEARCH','EXPORT_EXCEL', 'RELOAD','TEMPLATE_IMPORT','IMPORT_EXCEL']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+        <div *ngIf="this.selectedIndex == 4" class="container mx-auto mt-4 min-h-[calc(100vh-320px)]">
+          <g-datatable
+            #transactionDataTable
+            [classRow]="classRow"
+            [extendData]="{ transactionId: transactionId }"
+            [columns]="transactionColumnsTable"
+            [loading]="stationFacade.isLoading$ | async"
+            [data]="(stationFacade.transactionPagination$ | async)?.content"
+            [total]="(stationFacade.transactionPagination$ | async)?.totalElements"
+            [showSearch]="false"
+            (ngChange)="getTransactionList($event)"
+          >
+            <ng-template #recordId let-data>
+              <div class="flex items-center">
+                <button
+                  class="text-blue-800 hover:text-blue-600 font-medium truncate cursor-pointer text-left float-left"
+                  [title]="'routes.admin.Layout.detail' | translate"
+                  (click)="handelOnClick(data.transactionId)"
+                >
+                  {{ data?.recordId }}
+                </button>
+                <i
+                  class="las la-trash gn-font-14 gn-ml-5 text-red-500 text-sm mr-2 mt-1 gn-click hover:cursor-pointer float-left"
+                  *ngIf="data.isImport"
+                  (nzOnConfirm)="handleDeleteTransaction(data.transactionId)"
+                  nz-popconfirm
+                  nzPopconfirmTitle="Bạn có muốn xoá phiếu cân không?"
+                ></i>
+              </div>
+            </ng-template>
+          </g-datatable>
+        </div>
+      </nz-tab>
+
+      <nz-tab [nzTitle]="'Log file'">
+        <div *ngIf="this.selectedIndex == 5" class="container mx-auto mt-4 min-h-[calc(100vh-248px)]">
+          <h2 class="text-xl font-semibold mb-2.5">QUẢN TRỊ LOG FILE</h2>
+          <div class="flex gap-4">
+            <div class="basis-1/3">
+              <h2 class="text-lg font-semibold">Danh sách file</h2>
+            </div>
+            <div class="flex basis-2/3 items-start">
+              <div class="basis-1/2">
+                <p class="font-semibold">
+                  Đang xem:
+                  <span class="ml-2" [ngClass]="{ 'font-normal italic': !dataByIdFileLog?.fileName }">
+                    {{ dataByIdFileLog?.fileName || '(trống)' }}
+                  </span>
+                </p>
+                <p class="font-semibold">
+                  Tải lên lúc:
+                  <span class="ml-2" [ngClass]="{ 'font-normal italic': !dataByIdFileLog?.createdOnDate }">
+                    {{ (dataByIdFileLog?.createdOnDate | date : 'dd/MM/yyyy HH:mm') || '(trống)' }}
+                  </span>
+                </p>
+              </div>
+              <div class="basis-1/2 flex items-center">
+                <label class="mr-3 font-semibold">Tìm kiếm</label>
+                <div>
+                  <nz-input-group [nzSuffix]="suffixIconSearch">
+                    <input
+                      type="text"
+                      nz-input
+                      [(ngModel)]="searchValueNodes"
+                      placeholder="{{ 'components.data-table.pleaseEnterValueToSearch' | translate }}"
+                      class=""
+                    />
+                  </nz-input-group>
+                  <ng-template #suffixIconSearch>
+                    <i class="las la-search la-lg"></i>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="listDataFileLog.length > 0" class="flex gap-4 mt-2">
+            <div class="basis-1/3 rounded-lg shadow-md border border-gray-200 p-4">
+              <nz-tree
+                [nzData]="nodes"
+                nzDraggable
+                nzBlockNode
+                nzIcon
+                [nzShowLine]="true"
+                [nzTreeTemplate]="nzTreeTemplate"
+                [nzBeforeDrop]="beforeDropNodes"
+                [nzSearchValue]="searchValueNodes"
+                (nzClick)="onClickNodes($event)"
+              >
+                <ng-template #nzTreeTemplate let-node>
+                  <div
+                    class="flex item-center justify-between"
+                    [ngClass]="{ 'font-semibold text-base': node.origin.isGroup }"
+                  >
+                    <p class="">{{ node.title }}</p>
+                    <div class="flex items-center">
+                      <i
+                        class="las la-trash text-red-500 h-4"
+                        nz-popconfirm
+                        nzPopconfirmTitle="Bạn có chắc là xoá file log này không?"
+                        (nzOnConfirm)="onClickDeleteFileLog(node.key)"
+                      ></i>
+                    </div>
+                  </div>
+                </ng-template>
+              </nz-tree>
+            </div>
+            <pre class="hidden">{{this.fileLogFacade.data$ | async | json}}</pre>
+            <div class="basis-2/3 rounded-lg shadow-md border border-gray-200 p-4">
+              <div class="whitespace-pre-line" [ngClass]="{ 'italic': !dataByIdFileLog?.content }">
+                {{ contentFileLog || '(Chưa chọn file log)' }}
+              </div>
+              <div *ngIf="isVisibleSeeMore" class="mt-4 flex">
+                <button class="mx-auto border border-gray-400 rounded py-0.5 px-1" (click)="seeMoreFileLog(20)">Xem thêm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</section>
+
+<ng-template #templateFilter let-condition="filter">
+  <div *ngIf="condition?.includes('LOAI_PHIEU')" >
+    <nz-select
+        class="w-48"
+        nzShowSearch
+        nzPlaceHolder="{{ 'routes.admin.station.chooseTransactionType' | translate }}"
+        [nzAllowClear]="true"
+        [(ngModel)]="isImport"
+        (ngModelChange)="filterTransactionType($event)"
+      >
+        <nz-option
+          *ngFor="let transactionType of transactionTypes; index as index"
+          [nzValue]="transactionType.code"
+          [nzLabel]="transactionType.name"
+        ></nz-option>
+      </nz-select>
+  </div>
+
+  <div *ngIf="condition?.includes('KHACH_HANG')" >
+    <nz-select
+        class="w-48"
+        nzShowSearch
+        nzPlaceHolder="{{ 'routes.admin.station.chooseCustomer' | translate }}"
+        [nzAllowClear]="true"
+        [(ngModel)]="customerCode"
+        (ngModelChange)="filterCustomer($event)"
+      >
+        <nz-option
+          *ngFor="let customer of customersFacade.customers$ | async; index as index"
+          [nzValue]="customer.code"
+          [nzLabel]="customer.name"
+        ></nz-option>
+      </nz-select>
+  </div>
+
+  <div *ngIf="condition?.includes('DOI_TAC')" >
+    <nz-select
+        class="w-48"
+        nzShowSearch
+        nzPlaceHolder="{{ 'routes.admin.station.choosePartner' | translate }}"
+        [nzAllowClear]="true"
+        [(ngModel)]="partnerCode"
+        (ngModelChange)="filterPartner($event)"
+      >
+        <nz-option
+          *ngFor="let partner of customersFacade.partners$ | async; index as index"
+          [nzValue]="partner.code"
+          [nzLabel]="partner.name"
+        ></nz-option>
+      </nz-select>
+  </div>
+
+  <div *ngIf="condition?.includes('MAT_HANG')" >
+    <nz-select
+        class="w-48"
+        nzShowSearch
+        nzPlaceHolder="{{ 'routes.admin.station.chooseItem' | translate }}"
+        [nzAllowClear]="true"
+        [(ngModel)]="itemCode"
+        (ngModelChange)="filterItem($event)"
+      >
+        <nz-option
+          *ngFor="let item of itemsFacade.items$ | async; index as index"
+          [nzValue]="item.code"
+          [nzLabel]="item.name"
+        ></nz-option>
+      </nz-select>
+  </div>
+
+  <div *ngIf="condition?.includes('DATE')" >
+    <nz-range-picker
+      class="w-72"
+      [(ngModel)]="selectedDateRange"
+      [nzAllowClear]="true"
+      (ngModelChange)="filteDateRange($event)"
+      [nzPlaceHolder]="['routes.admin.station.fromDate' | translate, 'routes.admin.station.toDate' | translate]"
+    >
+    </nz-range-picker>
+  </div>
+
+  <div *ngIf="condition?.includes('SEARCH')" >
+    <nz-form-control class="w-full">
+      <div class="relative">
+        <input
+          type="text"
+          class="sm:w-60 h-8 rounded-md text-gray-700 bg-white border border-solid border-gray-200 pr-9 pl-4 hover:ring-1 hover:ring-blue-500 focus-visible:outline-blue-300"
+          placeholder="{{ 'components.data-table.pleaseEnterValueToSearch' | translate }}"
+          [(ngModel)]="fullTextSearch"
+          (change)="onSearch(fullTextSearch)"
+        />
+        <i class="text-lg las la-search absolute top-1/2 -translate-y-1/2 right-2 z-[1]"></i>
+      </div>
+    </nz-form-control>
+  </div>
+
+  <div *ngIf="condition?.includes('EXPORT_EXCEL')" >
+    <div
+        *ngIf="selectedIndex !== 3 && selectedIndex !== 2"
+        class="relative"
+        (mouseenter)="showMenu()"
+        (mouseleave)="hideMenu()"
+      >
+        <g-button icon="la-file-export las text-lg" [text]="'routes.admin.station.exportExcel' | translate"> </g-button>
+
+        <ul class="absolute z-50 shadow-md" nz-menu [nzMode]="'vertical'" *ngIf="isMenuVisible">
+          <li nz-submenu nzTitle="Tổng hợp chung">
+            <ul>
+              <li nz-menu-item (click)="handelExportExcel('EX_ALL', 100)">Tất cả loại phiếu</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_ALL', 0)">Hàng xuất</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_ALL', 1)">Hàng nhập</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_ALL', 2)">Dịch vụ</li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzTitle="Tổng hợp theo mặt hàng">
+            <ul>
+              <li nz-menu-item (click)="handelExportExcel('EX_ITEM', 100)">Tất cả loại phiếu</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_ITEM', 0)">Hàng xuất</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_ITEM', 1)">Hàng nhập</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_ITEM', 2)">Dịch vụ</li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="Tổng hợp theo nhà cung cấp">
+            <ul>
+              <li nz-menu-item (click)="handelExportExcel('EX_SELLER', 100)">Tất cả loại phiếu</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_SELLER', 0)">Hàng xuất</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_SELLER', 1)">Hàng nhập</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_SELLER', 2)">Dịch vụ</li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="Tổng hợp theo khách hàng">
+            <ul>
+              <li nz-menu-item (click)="handelExportExcel('EX_BUYER', 100)">Tất cả loại phiếu</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_BUYER', 0)">Hàng xuất</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_BUYER', 1)">Hàng nhập</li>
+              <li nz-menu-item (click)="handelExportExcel('EX_BUYER', 2)">Dịch vụ</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+  </div>
+
+  <div *ngIf="condition?.includes('RELOAD')" >
+    <g-button
+      (click)="reload()"
+      icon="la-sync las text-lg"
+      [text]="'routes.admin.station.reload' | translate"
+    ></g-button>
+  </div>
+
+  <div *ngIf="condition?.includes('TEMPLATE_IMPORT')" >
+    <g-button
+      (click)="downloadTransactionTemplate()"
+      icon="la-cloud-download-alt las text-lg"
+      [text]="'routes.admin.station.downloadTransactionTemplate' | translate"
+    ></g-button>
+  </div>
+
+  <div *ngIf="condition?.includes('IMPORT_EXCEL')" >
+    <nz-upload
+          [nzAction]="urlUpload"
+          [nzAccept]="'.xlsx'"
+          [nzShowUploadList]="false"
+          (nzChange)="handleuploadTransaction($event)"
+        >
+          <g-button
+            icon="la-cloud-download-alt las text-lg"
+            [text]="'routes.admin.station.uploadTransaction' | translate"
+          ></g-button>
+        </nz-upload>
+  </div>
+</ng-template>

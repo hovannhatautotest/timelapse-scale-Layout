@@ -1,0 +1,88 @@
+{"level":30,"time":"2024-01-31T10:58:00.741Z","pid":10936,"hostname":"Admin-PC","msg":"Listening on 54006"}
+{"level":30,"time":"2024-01-31T10:58:00.891Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-01-31T10:58:00.892Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-01-31T10:58:00.900Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-01-31T10:58:00.900Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (D:\Python312\Lib\site-packages\Browser\wrapper\index.js:9968:15)
+    at PlaywrightServer.getActiveBrowser (D:\Python312\Lib\site-packages\Browser\wrapper\index.js:10588:59)
+    at PlaywrightServer.setTimeout (D:\Python312\Lib\site-packages\Browser\wrapper\index.js:10838:57)
+    at handleUnary (D:\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:852:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+=============================================================
+{"level":30,"time":"2024-01-31T10:58:00.967Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2024-01-31T10:58:02.091Z","pid":10936,"hostname":"Admin-PC","msg":"Adding browser to stack: chromium, version: 120.0.6099.28"}
+{"level":30,"time":"2024-01-31T10:58:02.092Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method newBrowser"}
+{"level":30,"time":"2024-01-31T10:58:02.092Z","pid":10936,"hostname":"Admin-PC","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2024-01-31T10:58:02.103Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method newPage"}
+{"level":30,"time":"2024-01-31T10:58:02.104Z","pid":10936,"hostname":"Admin-PC","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2024-01-31T10:58:02.145Z","pid":10936,"hostname":"Admin-PC","msg":"Changed active context"}
+{"level":30,"time":"2024-01-31T10:58:02.937Z","pid":10936,"hostname":"Admin-PC","msg":"Video path: undefined"}
+{"level":30,"time":"2024-01-31T10:58:02.937Z","pid":10936,"hostname":"Admin-PC","msg":"Changed active page"}
+{"level":30,"time":"2024-01-31T10:58:06.962Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method newPage"}
+{"level":30,"time":"2024-01-31T10:58:07.102Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.105Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is disabled, return Locator: //button[@title = \"Đăng ký\"] in page."}
+{"level":30,"time":"2024-01-31T10:58:07.209Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.225Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method click"}
+{"level":30,"time":"2024-01-31T10:58:07.225Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //span[contains(text(),\"Đăng ký\")] in page."}
+{"level":30,"time":"2024-01-31T10:58:07.483Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method click"}
+{"level":30,"time":"2024-01-31T10:58:07.596Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.597Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is disabled, return Locator: xpath=//*[contains(@class, \"ant-popover\")]//*[contains(@class, \"ant-btn-primary\")] in page."}
+{"level":30,"time":"2024-01-31T10:58:07.631Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.645Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.661Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.670Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.674Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.678Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.687Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.691Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.694Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.704Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.708Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2024-01-31T10:58:07.822Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.823Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is disabled, return Locator: xpath=//*[contains(@class, \"ant-spin-spinning\")] in page."}
+{"level":30,"time":"2024-01-31T10:58:07.851Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.898Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.898Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is disabled, return Locator: //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:07.903Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:07.911Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method clearText"}
+{"level":30,"time":"2024-01-31T10:58:07.911Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:07.956Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method clearText"}
+{"level":30,"time":"2024-01-31T10:58:07.966Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method fillText"}
+{"level":30,"time":"2024-01-31T10:58:07.966Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:08.028Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method fillText"}
+{"level":30,"time":"2024-01-31T10:58:08.041Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:08.041Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is disabled, return Locator: //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:08.046Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getElementCount"}
+{"level":30,"time":"2024-01-31T10:58:08.058Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2024-01-31T10:58:08.058Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:08.071Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2024-01-31T10:58:08.077Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method click"}
+{"level":30,"time":"2024-01-31T10:58:08.078Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //input[@placeholder='Xác nhận mật khẩu']/../i[contains(@class, \"la-eye-slash\")] in page."}
+{"level":30,"time":"2024-01-31T10:58:08.153Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method click"}
+{"level":30,"time":"2024-01-31T10:58:08.169Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getDomProperty"}
+{"level":30,"time":"2024-01-31T10:58:08.169Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:08.214Z","pid":10936,"hostname":"Admin-PC","msg":"Retrieved dom property for element //input[@placeholder='Xác nhận mật khẩu'] containing text"}
+{"level":30,"time":"2024-01-31T10:58:08.214Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getDomProperty"}
+{"level":30,"time":"2024-01-31T10:58:08.219Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getText"}
+{"level":30,"time":"2024-01-31T10:58:08.220Z","pid":10936,"hostname":"Admin-PC","msg":"Strict mode is enabled, find Locator with //input[@placeholder='Xác nhận mật khẩu'] in page."}
+{"level":30,"time":"2024-01-31T10:58:08.257Z","pid":10936,"hostname":"Admin-PC","msg":"Retrieved text for element //input[@placeholder='Xác nhận mật khẩu'] containing SI_03. Fugit quibusdam."}
+{"level":30,"time":"2024-01-31T10:58:08.257Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getText"}
+{"level":30,"time":"2024-01-31T10:58:08.264Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-01-31T10:58:08.305Z","pid":10936,"hostname":"Admin-PC","msg":"Removed page=4eae3efa-03b8-426c-862a-7327992e633a from context=bfed212f-875d-488b-a80a-4f6e09e73666 page stack"}
+{"level":30,"time":"2024-01-31T10:58:08.923Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method closeAllBrowsers"}
+{"level":30,"time":"2024-01-31T10:58:08.927Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-01-31T10:58:08.928Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (D:\Python312\Lib\site-packages\Browser\wrapper\index.js:9968:15)
+    at PlaywrightServer.getActiveBrowser (D:\Python312\Lib\site-packages\Browser\wrapper\index.js:10588:59)
+    at PlaywrightServer.setTimeout (D:\Python312\Lib\site-packages\Browser\wrapper\index.js:10838:57)
+    at handleUnary (D:\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:852:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+=============================================================
+{"level":30,"time":"2024-01-31T10:58:08.989Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-01-31T10:58:08.989Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-01-31T10:58:09.097Z","pid":10936,"hostname":"Admin-PC","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-01-31T10:58:09.097Z","pid":10936,"hostname":"Admin-PC","msg":"End of node method closeAllBrowsers"}
